@@ -42,10 +42,10 @@ if __name__ == '__main__':
         most_similar_key = ""
         answerCorrect = ""
 
+        #Check to see if question-word is in the vocabulary
         try:
-            # Check the "most similar words", using the default "cosine similarity" measure.
             result = model.most_similar(questionList[i])
-            most_similar_key, similarity = result[0]  # look at the first match
+            most_similar_key, similarity = result[0]
         except KeyError:
             answerCorrect = "guess"
             most_similar_key = "question-word not found in model"
@@ -53,6 +53,8 @@ if __name__ == '__main__':
             data = [questionList[i], answerList[i], most_similar_key, answerCorrect]
             writer.writerow(data)
             continue
+
+        # Check the "most similar words", using the default "cosine similarity" measure.
 
         try:
             cosineList.append(model.similarity(questionList[i], choice1List[i]))
@@ -78,16 +80,18 @@ if __name__ == '__main__':
             counter += 1
             cosineList.append(0)
 
-        if counter == 4:
+        if counter >= 4:
+            #this is the case if none of the words from the choices exist in the vocabulary
+            #we extract from the model the most similar word to the question word
             answerCorrect = "guess"
-            most_similar_key = "guess-words not found in model"
+            result = model.similar_by_word(questionList[i])
+            most_similar_key, similarity = result[0]
             print("{},{},{},{}".format(questionList[i], answerList[i], most_similar_key, answerCorrect))
             data = [questionList[i], answerList[i], most_similar_key, answerCorrect]
             writer.writerow(data)
             continue
 
         max_value = max(cosineList)
-
         max_index = cosineList.index(max_value)
 
         if max_index == 0:
