@@ -11,29 +11,19 @@ if __name__ == '__main__':
 
     csvLines = synom.iloc[:, 0:].values
     questionList = []
+    answerList = []
+    choice1List = []
+    choice2List = []
+    choice3List = []
+    choice4List = []
 
     # Appending question words into a new list
     for line in csvLines:
         questionList.append(line[0])
-            
-    answerList = []
-    for line in csvLines:
         answerList.append(line[1])
-        
-    choice1List = []
-    for line in csvLines:
         choice1List.append(line[2])
-    
-    choice2List = []
-    for line in csvLines:
         choice2List.append(line[3])
-    
-    choice3List = []
-    for line in csvLines:
         choice3List.append(line[4])
-    
-    choice4List = []
-    for line in csvLines:
         choice4List.append(line[5])
 
     model_to_use = "glove-twitter-200"
