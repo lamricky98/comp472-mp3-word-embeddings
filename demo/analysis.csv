@@ -1,0 +1,5 @@
+glove-twitter-200,1193514,14,20,0.7
+glove-twitter-100,1193514,12,20,0.6
+glove-wiki-gigaword-300,400000,20,20,1.0
+fasttext-wiki-news-subwords-300,999999,20,20,1.0
+word2vec-google-news-300,3000000,19,20,0.95
